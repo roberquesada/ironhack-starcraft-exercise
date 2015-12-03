@@ -5,7 +5,7 @@ class MatchesController < ApplicationController
 
   def show_faction_results
     matches = Match.get_faction_matches(params[:faction])
-    porcent = Match.get_overall_win_porcentage(matches, params[:faction])
-    render json: {matches: matches, win_porcent: porcent}
+    win_porcent = Match.get_overall_win_porcentage(matches, params[:faction])
+    render json: { win_porcent: win_porcent, matches: matches}
   end
 end
