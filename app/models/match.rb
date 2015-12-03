@@ -4,16 +4,16 @@ class Match < ActiveRecord::Base
 
    def self.get_player_matches player_id
      Match.joins(
-     "INNER JOIN 'players' ON
-     'players'.'id' = 'matches'.'winner_id'"
-     ).where("'players'.'id' = " + player_id)
+     "INNER JOIN players ON
+     players.id = matches.winner_id"
+     ).where("players.id = '#{player_id}'")
    end
 
    def self.get_faction_matches faction
      faction.capitalize!
      Match.joins(
-     "INNER JOIN 'players' ON 'players'.'id' = 'matches'.'winner_id'"
-     ).where("'matches'.'winner_faction' = '" + faction + "' OR 'matches'.'loser_faction' = '" + faction + "'")
+     "INNER JOIN players ON players.id = matches.winner_id"
+     ).where("matches.winner_faction = '#{faction}' OR matches.loser_faction = '#{faction}'")
    end
 
    def self.get_overall_win_porcentage matches, faction
